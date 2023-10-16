@@ -1,0 +1,31 @@
+*{
+    margin:0;
+    padding:0;
+}
+/*body, html{
+    width: 100%;
+    height: 100%;
+}*/
+nav {
+    position:fixed;
+    width: 20px;
+    height: 100%;
+    background: #4b4b4b;
+    align-items: center;
+    padding: 10px 20px;
+}
+
+/*nav ul{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}*/
+nav ul li{
+    list-style: none;
+    padding: 0pc 5px;
+}
+
+canvas {
+    display: blocks;
+    background-color: #ffffff;
+}
