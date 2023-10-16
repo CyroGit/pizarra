@@ -53,6 +53,42 @@ function init(){
         mouse.position.y= e.clientY/height;
         mouse.move= true;
     })
+
+    //touch screen
+    canvas.addEventListener('touchstart',(e)=>{
+        mouse.position.x=  e.touches[0].clientX/width;
+        mouse.position.y=  e.touches[0].clientY/height;
+        mouse.position_prev={x:mouse.position.x, y:mouse.position.y};
+       // mouse.position_prev={x: e.touches[0].clientX/width,y:e.touches[0].clientY/height};
+        mouse.click=true;
+       // console.log(e);
+        //window.alert(e);
+    });
+    canvas.addEventListener('touchend',(e)=>{
+        //mouse.position_prev={x: e.touches[0].clientX/width,y:e.touches[0].clientY/height};
+        mouse.click=false;
+       // console.log(e);
+    });
+    canvas.addEventListener("touchleave",(e)=>{
+       // mouse.position_prev={x: e.touches[0].clientX/width,y:e.touches[0].clientY/height};
+        mouse.click=false;
+    });
+    canvas.addEventListener('touchcancel',(e)=>{
+        //mouse.position_prev={x: e.touches[0].clientX/width,y:e.touches[0].clientY/height};
+        mouse.click=false;
+        
+    });
+
+    canvas.addEventListener('touchmove',(e)=>{
+        //mouse.position.x= e.clientX/width;
+        //mouse.position.y= e.clientY/height;
+        mouse.position.x=  e.touches[0].clientX/width;
+        mouse.position.y=  e.touches[0].clientY/height;
+        mouse.move= true;
+        //window.alert( mouse.position.x);
+    });
+
+
      //nav bar
      const nav_new = document.getElementById('newcanvas');
      nav_new.addEventListener('click',(e)=>{
