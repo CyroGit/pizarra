@@ -14,4 +14,5 @@ app.use(express.static(path.join(__dirname,'public')));
 //start server
 server.listen(app.get('port'),()=>{
 console.log("server on port 3000")
+//console.log(path.join(__dirname,'public'));
 });
