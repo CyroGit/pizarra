@@ -20,21 +20,26 @@ function init(){
     //canvas.style.backgroundColor = '#00F8'
     
     const socket = io();
-
+    var colorbrush;
     socket.on('draw_line',data => {
         const line = data.line;
+        
         //console.log('dibujo');
         //console.log(line);
         canvascontex.beginPath();
         canvascontex.lineWith=2;
         canvascontex.moveTo(line[0].x * width ,line[0].y * height )
         canvascontex.lineTo(line[1].x * width ,line[1].y * height  )
-        //canvascontex.strokeStyle = "#2BA6CB";
+        canvascontex.strokeStyle = data.color;
         canvascontex.stroke();
     });
     socket.on('Clear_line',()=>{
         canvascontex.clearRect(0, 0, canvas.width, canvas.height);
     });
+    socket.on('color_brush',datacolor=>{
+        //canvascontex.strokeStyle =datacolor;
+        colorbrush=datacolor;
+    })
 
 
     canvas.addEventListener('mouseleave',(e)=>{
@@ -104,10 +109,16 @@ function init(){
      }
      
      );
+     const nav_colorbrush=document.getElementById('colorbrush');
+     nav_colorbrush.addEventListener("change",(e)=>{
+        //Envio el nuevo color;
+        //console.log('el color: ' + e.target.value)
+        socket.emit('color_brush',e.target.value);
+     });
 
     function update(){
        if (mouse.click && mouse.move && mouse.position_prev){
-            socket.emit('draw_line',{line:[mouse.position,mouse.position_prev]})
+            socket.emit('draw_line',{line:[mouse.position,mouse.position_prev], color:colorbrush})
             mouse.move = false;
         } 
         mouse.position_prev={x:mouse.position.x, y:mouse.position.y};
